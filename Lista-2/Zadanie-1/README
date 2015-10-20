@@ -1,0 +1,49 @@
+Samo ps pokazuje podstawowe informację o procesach uruchomionych w danym terminalu
+
+  PID TTY          TIME CMD
+ 2867 pts/1    00:00:00 bash
+ 3191 pts/1    00:00:00 ps
+
+ps -u pokazuje szczegółowe informację o procesach uruchomionych w danym terminalu:
+
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+student   2867  0.0  0.2   9416  4580 pts/1    Ss   09:32   0:00 bash
+student   3201  0.0  0.0   6164  1156 pts/1    R+   09:40   0:00 ps -u
+
+ps t <terminal> pokazuje podstawowe informacje o procesach uruchomionych w podanym terminalu:
+
+student@lab2-1:~/skrypt$ ps t
+  PID TTY      STAT   TIME COMMAND
+ 3344 pts/0    Ss     0:00 bash
+ 3400 pts/0    R+     0:00 ps t
+student@lab2-1:~/skrypt$ ps t pts/1
+  PID TTY      STAT   TIME COMMAND
+ 2867 pts/1    Ss+    0:00 bash
+
+
+ps p <PID procesu> pokazuje podstawowe informacje o procesie, którego PID podaliśmy
+
+student@lab2-1:~/skrypt$ ps p 2867
+  PID TTY      STAT   TIME COMMAND
+ 2867 pts/1    Ss     0:00 bash
+
+Opisy kolumn:
+
+PID: Unikatowy identyfikator procesu
+USER: Użytkownik, który wywołał proces
+TTY: Terminal na którym proces jest uruchomiony
+TIME: Czas trwania procesu
+%CPU: Zużycie procesora przez proces
+%MEM: Zużycie pamięci RAM przez proces
+VSZ: Pamięć do której proces może mieć dostęp
+RSS: Zaalokowana pamięć przez proces
+STAT: Informacje o stanie procesu
+START: Czas kiedy proces się zaczął
+COMMAND: Komenda użyta do wywołania tego procesu
+
+Aby pokazać listę wszystkich procesów w systemie: "ps -ely"
+Aby zobaczyć szczegółowe dane o danych procesie (PID rodzica, zużycie pamięci itp.): ps -ly <PID procesu>
+
+(Ubuntu 14.04) terminale wykorzystują urządzenia: /dev/pts/0, /dev/pts/3, /dev/pts/9, /dev/pts/12
+
+Procesy podpiąte od te urządzenia to "ps axjf" oraz bash'e

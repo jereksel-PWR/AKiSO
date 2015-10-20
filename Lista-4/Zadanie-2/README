@@ -1,0 +1,5 @@
+Testy zostały przeprowadzone na Ubuntu 14.10
+
+1. Nie (test1.c)
+2. Tak (Sygnał 2 restartuje init'a, sygnały 6, 11 zabija inita - komputer się zawiesza)
+3. Tak (test3.c)

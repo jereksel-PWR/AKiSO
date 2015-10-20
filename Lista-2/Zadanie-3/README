@@ -1,0 +1,13 @@
+Aby wykonać zadanie należy
+1. Wykonać w jednej konsoli: while true; do echo "TEST"; done | sed 's/T/t/g' | sed 's/E/e/g' | cat
+2. W drugiej konsoli wywołujemy ps axjf
+3. Zauważamy, że wywołane procesy mają wspólnego parenta (PPID) i numer PGID:
+
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+ 2955  2965  2965  2965 pts/3     3078 Ss    1000   0:00              \_ bash
+ 2965  3078  3078  2965 pts/3     3078 R+    1000   0:02              |   \_ bash
+ 2965  3079  3078  2965 pts/3     3078 S+    1000   0:00              |   \_ sed s/T/t/g
+ 2965  3080  3078  2965 pts/3     3078 S+    1000   0:00              |   \_ sed s/E/e/g
+ 2965  3081  3078  2965 pts/3     3078 S+    1000   0:00              |   \_ cat
+
+

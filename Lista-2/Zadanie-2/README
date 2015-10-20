@@ -1,0 +1,15 @@
+$ cat > test.c                            <-- Rozpoczęcie pisania do pliku
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    printf("Hello, World!\n");
+    return 0;
+}
+^D                                        <-- EOF - zakończenie pisania do pliku
+$ gcc -Wall -pedantic test.c              <-- Skompilowanie programu                   
+$ ./a.out                                 <-- Włączenie programu
+
+(źródło - manual):
+-Wall - Pokazuje ostrzeżenia w konstrukcjach, które są uważane za kontrowersyjne
+-pedantic - Pokazuje ostrzeżenia w częściach programu niezgodnych ze standardami ISO

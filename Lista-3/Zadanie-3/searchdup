@@ -1,0 +1,19 @@
+#!/bin/bash
+
+display_usage() {
+  echo "Ten skrypt wypisuje duplikaty plików w danym katalogu i jego podkatalogach"
+  echo -e "\nUsage:\n$0 [Katalog] \n"
+  }
+
+  if [  $# -lt 1 ]
+  then
+    display_usage
+    exit 1
+  fi
+
+
+chmod +x file_info.sh
+
+location=$1
+
+find $location -type f -exec ./file_info.sh '{}' ';' | sort -n -k1.34 | uniq -D -w32 --all-repeated=separate | tac | cut -f3

@@ -1,0 +1,4 @@
+#/bin/bash
+
+nasm -felf main.asm
+gcc -m32 main.c main.o -o main

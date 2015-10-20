@@ -1,0 +1,10 @@
+Aby wykonać polecenie należy:
+1. Wykonać polecenia (w oddzielnych terminalach):
+a) mkfifo pipe
+b) cat > pipe
+c) cat < pipe
+d) cat < pipe
+e) cat < pipe
+
+Zauważamy, że po wpisaniu tekstu do terminalu b) i naciśnięciu enter lub ctrl-D (EOF) tekst pojawia się w terminalu c, d, lub e (losowo)
+Terminale c), d) i e) czekają na dane do czasu zamknięcia potoku (EOF w terminalu b))

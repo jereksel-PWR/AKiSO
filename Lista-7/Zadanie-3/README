@@ -1,0 +1,29 @@
+﻿Atak buffer overflow polega na zastąpieniu adresu powrotu w taki sposób, aby skoczyć w nasz własny kod. Robimy to przez nadpisanie części bufora, która teoretycznie nie jest dla nas dostępna.
+
+Stos (na podstawie dołączonego programu):
+---------------
+|             |
+|             |
+| buffer[256] |
+|             |
+|             |
+|             |
+---------------
+|             |
+|  Inne dane  |
+|             |
+---------------
+|Adres powrotu|
+---------------
+
+Tak więc naszym zadaniem jest zmiana adresu powrotu w taki sposób, aby skoczyć na początek buffer[256] (będziemy tam przechowywać nasz kod)
+
+Nasz kod (zapisany w pliku stack.asm) ma za zadanie wywołać /bin/sh za pomocą funkcji execve. Jej argumenty to ("/bin/sh", wskaźnik do "/bin/sh", NULL). Ponieważ nie możemy używać NULL'a w kodzie (powoduje on przerwanie kopiowania przez strcpy, musimy wyliczyć go w kodzie (jest to xor X z X). 
+
+AAAABBBB obok /bin/sh są, aby przechować tam adres oraz NULL.
+
+Aby móc zastosować ten atak musimy wyłączyć 2 zabezpieczenia tworzone przez gcc
+-z execstack - powoduje zezwolenie na wykonywanie kodu na stosie (domyślnie nie możemy wywoływac kodu tam przechowywanego)
+-fno-stack-protector - wyłącza wszystkie zabezpiecznia przez atakiem stack smash
+
+Randomizacja stosu powoduje, że za każdym uruchomieniem programu początek stosu znajduje się w innym miejscu (nie można więc tak prosto ustawić adres skoku do naszego kodu)
